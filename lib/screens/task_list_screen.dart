@@ -41,17 +41,55 @@ class _TaskListScreenState extends State<TaskListScreen> {
         backgroundColor: Colors.white,
         foregroundColor: Colors.black,
         actions: [
-          PopupMenuButton<TaskStatus?>(
-            icon: const Icon(Icons.filter_list),
-            onSelected: (status) {
-              context.read<TaskProvider>().setFilterStatus(status);
-            },
-            itemBuilder: (context) => [
-              const PopupMenuItem(value: null, child: Text("All")),
-              const PopupMenuItem(value: TaskStatus.todo, child: Text("To-Do")),
-              const PopupMenuItem(value: TaskStatus.inProgress, child: Text("In Progress")),
-              const PopupMenuItem(value: TaskStatus.done, child: Text("Done")),
-            ],
+          Consumer<TaskProvider>(
+            builder: (context, provider, child) => PopupMenuButton<TaskStatus?>(
+              icon: const Icon(Icons.filter_list),
+              onSelected: (status) {
+                provider.setFilterStatus(status);
+              },
+              itemBuilder: (context) => [
+                PopupMenuItem(
+                  value: null,
+                  child: Row(
+                    children: [
+                      Icon(Icons.check, color: provider.filterStatus == null ? Colors.blue : Colors.transparent),
+                      const SizedBox(width: 8),
+                      const Text("All"),
+                    ],
+                  ),
+                ),
+                PopupMenuItem(
+                  value: TaskStatus.todo,
+                  child: Row(
+                    children: [
+                      Icon(Icons.check, color: provider.filterStatus == TaskStatus.todo ? Colors.blue : Colors.transparent),
+                      const SizedBox(width: 8),
+                      const Text("To-Do"),
+                    ],
+                  ),
+                ),
+                PopupMenuItem(
+                  value: TaskStatus.inProgress,
+                  child: Row(
+                    children: [
+                      Icon(Icons.check, color: provider.filterStatus == TaskStatus.inProgress ? Colors.blue : Colors.transparent),
+                      const SizedBox(width: 8),
+                      const Text("In Progress"),
+                    ],
+                  ),
+                ),
+                PopupMenuItem(
+                  value: TaskStatus.done,
+                  child: Row(
+                    children: [
+                      Icon(Icons.check, color: provider.filterStatus == TaskStatus.done ? Colors.blue : Colors.transparent),
+                      const SizedBox(width: 8),
+                      const Text("Done"),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
         ],
       ),

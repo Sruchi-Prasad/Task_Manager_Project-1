@@ -16,17 +16,32 @@ class TaskProvider with ChangeNotifier {
   String draftDescription = '';
   DateTime? draftDueDate;
   String? draftBlockedBy;
+  TaskStatus draftStatus = TaskStatus.todo;
 
   TaskProvider(this._hiveService) {
     _loadTasks();
   }
 
   List<Task> get tasks {
+    final query = _searchQuery.trim().toLowerCase();
+    
     var filtered = _tasks.where((task) {
-      final matchesSearch = task.title.toLowerCase().contains(_searchQuery.toLowerCase());
-      final matchesFilter = _filterStatus == null || task.status == _filterStatus;
+      final matchesSearch = query.isEmpty || task.title.toLowerCase().contains(query);
+      
+      // Using explicit enum comparison or null check
+      final bool matchesFilter;
+      if (_filterStatus == null) {
+        matchesFilter = true;
+      } else {
+        matchesFilter = task.status == _filterStatus;
+      }
+      
       return matchesSearch && matchesFilter;
     }).toList();
+    
+    // Debug print (visible in flutter run shell)
+    debugPrint('Filtering. Search: "$query", Status: $_filterStatus, Result count: ${filtered.length}');
+    
     return filtered;
   }
 
@@ -45,6 +60,7 @@ class TaskProvider with ChangeNotifier {
   }
 
   void setFilterStatus(TaskStatus? status) {
+    if (_filterStatus == status) return;
     _filterStatus = status;
     notifyListeners();
   }
@@ -63,7 +79,7 @@ class TaskProvider with ChangeNotifier {
       title: draftTitle,
       description: draftDescription,
       dueDate: draftDueDate ?? DateTime.now(),
-      status: TaskStatus.todo,
+      status: draftStatus,
       blockedBy: draftBlockedBy,
     );
 
@@ -105,6 +121,7 @@ class TaskProvider with ChangeNotifier {
     draftDescription = '';
     draftDueDate = null;
     draftBlockedBy = null;
+    draftStatus = TaskStatus.todo;
   }
 
   bool isTaskBlocked(String taskId) {

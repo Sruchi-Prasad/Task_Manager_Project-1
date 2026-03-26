@@ -54,6 +54,7 @@ class _TaskFormScreenState extends State<TaskFormScreen> {
       provider.draftDescription = _descriptionController.text;
       provider.draftDueDate = _selectedDate;
       provider.draftBlockedBy = _selectedBlockedBy;
+      provider.draftStatus = _selectedStatus;
     }
   }
 
