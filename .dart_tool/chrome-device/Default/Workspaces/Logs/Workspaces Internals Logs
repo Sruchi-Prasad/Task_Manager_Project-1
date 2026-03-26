@@ -1,4 +1,0 @@
-{"logTime": "0326/070252", {"lineNo":0,"logLevel":2,"message":"MaybeOrchestrateMigration: MaybeOrchestrateMigration","source":"Workspace Migration","timestamp":"2026-03-26T07:02:52.771Z"}}
-{"logTime": "0326/070252", {"lineNo":0,"logLevel":2,"message":"Migrate_FeatureCheck: Migrate_FeatureCheck","source":"Workspace Migration","timestamp":"2026-03-26T07:02:52.771Z"}}
-{"logTime": "0326/070252", {"lineNo":0,"logLevel":2,"message":"MaybeWaitForPrefsToSync: Waiting for prefs to sync.","source":"Workspace Migration","timestamp":"2026-03-26T07:02:52.772Z"}}
-{"logTime": "0326/070252", {"lineNo":0,"logLevel":2,"message":"MaybeOrchestrateMigration: ~MaybeOrchestrateMigration","source":"Workspace Migration","timestamp":"2026-03-26T07:02:52.772Z"}}
