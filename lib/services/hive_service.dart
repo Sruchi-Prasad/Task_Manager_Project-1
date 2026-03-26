@@ -3,6 +3,7 @@ import '../models/task.dart';
 
 class HiveService {
   static const String _taskBoxName = 'tasks';
+  static const String _draftBoxName = 'drafts';
 
   Future<void> init() async {
     await Hive.initFlutter();
@@ -16,9 +17,11 @@ class HiveService {
     }
 
     await Hive.openBox<Task>(_taskBoxName);
+    await Hive.openBox(_draftBoxName);
   }
 
   Box<Task> get taskBox => Hive.box<Task>(_taskBoxName);
+  Box get draftBox => Hive.box(_draftBoxName);
 
   List<Task> getAllTasks() {
     return taskBox.values.toList();

@@ -49,12 +49,13 @@ class _TaskFormScreenState extends State<TaskFormScreen> {
 
   void _saveDraft() {
     if (widget.task == null) {
-      final provider = context.read<TaskProvider>();
-      provider.draftTitle = _titleController.text;
-      provider.draftDescription = _descriptionController.text;
-      provider.draftDueDate = _selectedDate;
-      provider.draftBlockedBy = _selectedBlockedBy;
-      provider.draftStatus = _selectedStatus;
+      context.read<TaskProvider>().updateDraft(
+            title: _titleController.text,
+            description: _descriptionController.text,
+            dueDate: _selectedDate,
+            blockedBy: _selectedBlockedBy,
+            status: _selectedStatus,
+          );
     }
   }
 

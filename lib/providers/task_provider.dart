@@ -20,6 +20,53 @@ class TaskProvider with ChangeNotifier {
 
   TaskProvider(this._hiveService) {
     _loadTasks();
+    _loadDraft();
+  }
+
+  void _loadDraft() {
+    final box = _hiveService.draftBox;
+    draftTitle = box.get('title', defaultValue: '');
+    draftDescription = box.get('description', defaultValue: '');
+    final dueDateTimestamp = box.get('dueDate');
+    if (dueDateTimestamp != null) {
+      draftDueDate = DateTime.fromMillisecondsSinceEpoch(dueDateTimestamp);
+    }
+    draftBlockedBy = box.get('blockedBy');
+    final statusIndex = box.get('statusIndex');
+    if (statusIndex != null) {
+      draftStatus = TaskStatus.values[statusIndex];
+    }
+  }
+
+  void updateDraft({
+    String? title,
+    String? description,
+    DateTime? dueDate,
+    String? blockedBy,
+    TaskStatus? status,
+  }) {
+    final box = _hiveService.draftBox;
+    if (title != null) {
+      draftTitle = title;
+      box.put('title', title);
+    }
+    if (description != null) {
+      draftDescription = description;
+      box.put('description', description);
+    }
+    if (dueDate != null) {
+      draftDueDate = dueDate;
+      box.put('dueDate', dueDate.millisecondsSinceEpoch);
+    }
+    if (blockedBy != null) {
+      draftBlockedBy = blockedBy;
+      box.put('blockedBy', blockedBy);
+    }
+    if (status != null) {
+      draftStatus = status;
+      box.put('statusIndex', status.index);
+    }
+    notifyListeners();
   }
 
   List<Task> get tasks {
@@ -122,6 +169,7 @@ class TaskProvider with ChangeNotifier {
     draftDueDate = null;
     draftBlockedBy = null;
     draftStatus = TaskStatus.todo;
+    _hiveService.draftBox.clear();
   }
 
   bool isTaskBlocked(String taskId) {
