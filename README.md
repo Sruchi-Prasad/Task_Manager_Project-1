@@ -1,60 +1,117 @@
-# Flutter Task Management App (Track B)
+# 📱 Flutter Task Management App (Flodo Assignment)
 
-A premium, mobile-first task management application built with a focus on UI/UX excellence and robust state management. 
+A premium, mobile-first task management application built using Flutter, with a strong focus on clean UI/UX, robust state management, and seamless local data persistence.
+
+---
 
 ## 📦 Features Overview
-- **Complete CRUD Support**: Create, Read, Update, and Delete tasks.
-- **Local Persistence**: Powered by Hive for instant access across sessions.
-- **Search with Debounce**: High-performance search with text highlighting.
-- **Status Filtering**: Rapid organization by To-Do, In Progress, and Done.
-- **Dependency Logic**: Visual blocking for unready tasks.
-- **Draft Auto-Save**: Persistent form drafts to prevent data loss.
-- **Premium Async UX**: 2s simulated loading states with interactive protection.
 
-## 🧠 Architecture
-The app follows a clean **separation of concerns** by leveraging the **Provider** pattern for state management. This ensures a highly scalable and maintainable codebase where business logic is decoupled from the UI layer.
+* ✅ **Complete CRUD Support**: Create, Read, Update, and Delete tasks.
+* 💾 **Local Persistence**: Powered by Hive for fast and reliable storage across sessions.
+* 🔍 **Debounced Search with Highlighting** *(Stretch Goal)*: Real-time search with highlighted matching text.
+* 🎯 **Status Filtering**: Filter tasks by To-Do, In Progress, and Done.
+* 🔗 **Task Dependency Logic**: Blocked tasks remain disabled until the parent task is completed.
+* 📝 **Draft Auto-Save**: Prevents data loss by restoring unsaved input.
+* ⏳ **Premium Async UX**: Simulated 2-second delay with loading indicator and disabled actions.
+
+---
+
+## 🧠 Track Chosen
+
+**Track B – Mobile Specialist**
+(Flutter + Local Database using Hive)
+
+---
+
+## 🚀 Stretch Goal Implemented
+
+* **Debounced Autocomplete Search with Real-Time Highlighting**
+
+---
 
 ## 📋 Task Model
-Each task in the system is structured with the following exact specifications:
-- **Title**: Descriptive name of the task.
-- **Description**: Detailed context or sub-tasks.
-- **Due Date**: Datepicker-integrated deadline.
-- **Status**: Categorized as `To-Do`, `In Progress`, or `Done`.
-- **Blocked By**: Optional dependency on another task (Logic: Task B remains disabled if Task A is not `Done`).
 
-## ✨ UI/UX Highlights (Track B Focus)
-Designed for a premium user experience with:
-- **Responsive Layout**: Adapts seamlessly to different screen sizes.
-- **Premium Typography**: Uses 'Roboto' for a clean, professional aesthetic.
-- **Interactive Feedback**: 
-  - **Greyed-out Blocked Tasks**: Visual lock icon and reduced opacity for blocked dependencies.
-  - **Dynamic Highlighting**: Search results are highlighted in real-time within titles.
-- **Loading UX**: 
-  - **Asynchronous Handling**: Demonstrates professional loading states during 2s simulated delays.
-  - **State Injection**: Save buttons are disabled during loading to prevent duplicate requests (no double-tap bugs).
-  - **Material 3 Spinner**: High-quality loading indicators for immediate feedback.
+Each task includes the following fields:
 
-## 💾 Technical Persistence
-- **Hive Database**: Uses a lightweight NoSQL database for ultra-fast local storage.
-- **Draft Persistence**: Task forms use **local state caching**. If a user starts typing and the app minimizes or closes, the draft is saved to Hive and automatically restored on the next open.
-- **Adapter Registration**: Custom Hive TypeAdapters for the `Task` and `TaskStatus` models ensure type safety.
+* **Title**: Task name
+* **Description**: Detailed information
+* **Due Date**: Selected via date picker
+* **Status**: `To-Do`, `In Progress`, or `Done`
+* **Blocked By**: Optional dependency on another task
+  👉 *A task remains disabled until the parent task is marked as Done*
+
+---
+
+## ✨ UI/UX Highlights
+
+Designed with a premium and intuitive user experience:
+
+* 📱 **Responsive Layout**: Works smoothly across devices
+* 🔤 **Typography**: Clean and modern design using Roboto
+* 🎨 **Visual Feedback**:
+
+  * Blocked tasks are greyed out with reduced opacity
+  * Active tasks are clearly distinguishable
+* 🔍 **Search Highlighting**: Matching text dynamically highlighted
+* ⏳ **Loading Experience**:
+
+  * 2-second simulated delay
+  * Loading indicator shown
+  * Save button disabled to prevent duplicate actions
+
+---
+
+## 💾 Data Persistence
+
+* **Hive Database**: Lightweight and fast NoSQL database
+* **Type Safety**: Custom TypeAdapters for `Task` and `TaskStatus`
+* **Draft Persistence**: Automatically saves in-progress task input and restores it on reopen
+
+---
 
 ## 🛠️ Tech Stack
-- **Flutter**: Framework.
-- **Provider**: State Management.
-- **Hive**: Local Persistence.
-- **Uuid**: Unique IDs.
-- **Intl**: Formatting.
 
-## 🚀 Setup Instructions
-1.  Ensure **Flutter** is installed.
-2.  Clone this repository.
-3.  Run `flutter pub get`.
-4.  Run `flutter run` (or `flutter run -d edge` for web).
+* Flutter
+* Dart
+* Provider (State Management)
+* Hive (Local Database)
+* Uuid (Unique IDs)
+* Intl (Date Formatting)
+
+---
+
+## 🎥 Demo Video
+
+👉 https://1drv.ms/v/c/F0EC80AB8EC79BC7/IQAGFHatWye9RqZcBA8VfHZUAXDjy-BCdN_YzW_M4gkDSOI?e=IJREuT
+
+---
+
+## ⚙️ Setup Instructions
+
+1. Ensure Flutter is installed
+2. Clone this repository
+3. Run:
+
+   ```
+   flutter pub get
+   flutter run
+   ```
+
+---
 
 ## 🤖 AI Usage & Challenges
-This project was built with the assistance of **Antigravity** (Google DeepMind).
-- **Initial Prompts**: used to generate the skeleton for Provider-based state management and Hive initialization.
-- **The Challenge**: Initially, the AI suggested an incorrect Hive adapter setup which caused runtime errors when deserializing enum values.
-- **The Fix**: Manually debugged the `TypeAdapter` logic and ensured all adapters were correctly registered in `main.dart` and `HiveService` before app launch.
-- **Optimization**: Refined the high-frequency search debounce logic beyond the AI's initial basic timer suggestion to ensure memory safety.
+
+This project was built with the assistance of AI tools.
+
+* **Usage**: Used for initial structure, UI suggestions, and debugging guidance
+* **Challenge Faced**: Incorrect Hive adapter implementation caused runtime errors during enum deserialization
+* **Solution**: Manually debugged and fixed TypeAdapter registration in `main.dart` and `HiveService`
+* **Optimization**: Improved debounce logic for better performance and memory safety
+
+---
+
+## 💡 Key Highlights
+
+* Clean and scalable architecture using Provider
+* Strong focus on UI/UX for better user experience
+* Real-world problem solving (dependency logic, async handling)
