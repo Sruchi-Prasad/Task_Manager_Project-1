@@ -82,7 +82,7 @@ Designed with a premium and intuitive user experience:
 
 ## 🎥 Demo Video
 
-👉 https://1drv.ms/v/c/F0EC80AB8EC79BC7/IQAGFHatWye9RqZcBA8VfHZUAXDjy-BCdN_YzW_M4gkDSOI?e=IJREuT
+👉 https://1drv.ms/v/c/F0EC80AB8EC79BC7/IQAGFHatWye9RqZcBA8VfHZUAXDjy-BCdN_YzW_M4gkDSOI?e=ANgKqJ
 
 ---
 
